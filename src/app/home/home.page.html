@@ -1,0 +1,69 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Blank
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="input-wrapper">
+    <div>
+      <ion-item class="wg-input">
+        <ion-label position="stacked">Date Time</ion-label>
+        <ion-input
+          (click)="toggleDateTimePicker(true)"
+          id="date"
+          #inputView
+          placeholder="Add date time"
+          value="{{ formattedAnswer() }}"
+          (keypress)="$event.preventDefault()"
+          [attr.disabled]="viewOnly"
+          (keyup)="clearAnswer()"
+        ></ion-input>
+        <ion-icon
+          name="wg-outline-calendar"
+          class="wg-form-icon"
+          *ngIf="!inputView.value && !viewOnly"
+          (click)="toggleDateTimePicker(true)"
+        ></ion-icon>
+        <ion-icon
+          name="wg-times-circle"
+          (click)="clearAnswer()"
+          class="wg-form-icon clickable"
+          *ngIf="answerForm.value?.answer && !viewOnly"
+        ></ion-icon>
+      </ion-item>
+    </div>
+  </div>
+
+  <ion-modal [isOpen]="datetimePickerOpened" class="wg-modal" (ionModalWillDismiss)="toggleDateTimePicker(false)">
+    <ng-template>
+      <form [formGroup]="answerForm">
+        <ion-datetime
+          id="datePicker"
+          hour-cycle="h11"
+          #datetime
+          [attr.disabled]="viewOnly"
+          size="cover"
+          [presentation]="date-time"
+          formControlName="answer"
+          (ionChange)="setAnswer()"
+          mode="md"
+        >
+        </ion-datetime>
+        <ion-buttons>
+          <ion-button (click)="setPicker()" [hidden]="!isMonthYearPicker" color="primary" id="btn-select-datetime">
+            select
+          </ion-button>
+          <ion-button (click)="cancel()" [hidden]="isMonthYearPicker" color="danger" id="btn-cancel-datetime">
+           cancel
+          </ion-button>
+          <ion-button (click)="confirm()" [hidden]="isMonthYearPicker" color="primary" id="btn-confirm-datetime">
+            Done
+          </ion-button>
+        </ion-buttons>
+      </form>
+    </ng-template>
+  </ion-modal>
+</ion-content>

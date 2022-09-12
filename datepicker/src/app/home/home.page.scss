@@ -1,0 +1,44 @@
+ion-datetime {
+  width: 100%;
+}
+
+.input-wrapper {
+  display: flex;
+  width: 100%;
+
+  & > div {
+    width: 100%;
+  }
+
+  &.with-tooltip > div {
+    width: calc(100% - 31px);
+  }
+
+  app-question-tooltip {
+    margin-left: auto;
+    margin-top: 58px;
+  }
+}
+ion-datetime {
+  --background: var(--ion-color-wg-white);
+  --background-rgb: var(--ion-color-wg-white);
+}
+ion-buttons {
+  justify-content: right;
+  margin-bottom: 10px;
+}
+.wg-modal {
+  &::part(content) {
+    --min-height: auto;
+  }
+}
+.wg-input {
+  .wg-form-icon {
+    width: 22px;
+    height: 3.1rem;
+
+    &.clickable {
+      z-index: 9;
+    }
+  }
+}
